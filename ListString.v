@@ -4,19 +4,24 @@ Require Import Coq.Strings.String.
 
 Import ListNotations.
 
+(** A string is a list of characters. *)
 Definition t : Set := list Ascii.ascii.
 
+(** Export to a standard string. *)
 Fixpoint to_string (s : t) : String.string :=
   match s with
   | [] => String.EmptyString
   | c :: s => String.String c (to_string s)
   end.
 
+(** Import a standard string. *)
 Fixpoint of_string (s : String.string) : t :=
   match s with
   | String.EmptyString => []
   | String.String c s => c :: of_string s
   end.
+
+(** * Comparison functions. *)
 
 Definition compose_compare (x y : comparison) : comparison :=
   match x with
@@ -83,6 +88,12 @@ Module Ascii.
     rewrite (Bool.compare_implies_eq _ _ H7).
     reflexivity.
   Qed.
+
+  Definition eqb (x y : Ascii.ascii) : bool :=
+    match compare x y with
+    | Eq => true
+    | _ => false
+    end.
 End Ascii.
 
 Fixpoint compare (x y : t) : comparison :=
@@ -125,3 +136,37 @@ Definition eq_dec (x y : t) : {x = y} + {x <> y}.
   - intro Heq; rewrite Heq in Heqb.
     rewrite eqb_same_is_eq in Heqb; congruence.
 Qed.
+
+Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
+  match s with
+  | [] => [List.rev' beginning]
+  | c' :: s =>
+    if Ascii.eqb c c' then
+      List.rev' beginning :: split_aux s c []
+    else
+      split_aux s c (c' :: beginning)
+  end.
+
+(** Split a string at each occurrence of a given character. *)
+Definition split (s : t) (c : ascii) : list t :=
+  split_aux s c [].
+
+Fixpoint split_limit_aux (s : t) (c : ascii) (beginning : t) (limit : nat)
+  : list t :=
+  match limit with
+  | O => []
+  | S limit =>
+    match s with
+    | [] => [List.rev' beginning]
+    | c' :: s =>
+      if Ascii.eqb c c' then
+        List.rev' beginning :: split_limit_aux s c [] limit
+      else
+        split_limit_aux s c (c' :: beginning) (S limit)
+    end
+  end.
+
+(** Split a string at each occurrence of a given character in a list of up to
+    [limit] elements. *)
+Definition split_limit (s : t) (c : ascii) (limit : nat) : list t :=
+  split_limit_aux s c [] limit.
