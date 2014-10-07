@@ -1,3 +1,5 @@
 -R . ListString
 
+ListStringComparison.v
+ListStringDefinition.v
 ListString.v
