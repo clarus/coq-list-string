@@ -1,5 +1,6 @@
 Require Import Coq.Lists.List.
 Require Import Coq.Strings.Ascii.
+Require "Char".
 Require Import "Comparison".
 Require Import "Definition".
 
@@ -9,7 +10,7 @@ Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
   match s with
   | [] => [List.rev' beginning]
   | c' :: s =>
-    if Ascii.eqb c c' then
+    if Char.eqb c c' then
       List.rev' beginning :: split_aux s c []
     else
       split_aux s c (c' :: beginning)
@@ -27,7 +28,7 @@ Fixpoint split_limit_aux (s : t) (c : ascii) (beginning : t) (limit : nat)
     match s with
     | [] => [List.rev' beginning]
     | c' :: s =>
-      if Ascii.eqb c c' then
+      if Char.eqb c c' then
         List.rev' beginning :: split_limit_aux s c [] limit
       else
         split_limit_aux s c (c' :: beginning) (S limit)

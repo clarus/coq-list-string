@@ -44,8 +44,8 @@ or import a Coq `string` using the string notation:
 * `eqb_same_is_eq : forall (x : t), eqb x x = true`
 * `eq_dec (x y : t) : {x = y} + {x <> y}`
 * `of_string (s : String.string) : t`
-* `to_string (s : t) : String.string`
 * `s (s : String.string) : t`
 * `split (s : t) (c : ascii) : list t`
 * `split_limit (s : t) (c : ascii) (limit : nat) : list t`
 * `t : Set := list Ascii.ascii`
+* `to_string (s : t) : String.string`

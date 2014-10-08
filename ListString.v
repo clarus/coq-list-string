@@ -1,11 +1,14 @@
-Require Import "Comparison".
-Require Import "Conversion".
-Require Import "Definition".
-Require Import "Etc".
+Require "Comparison".
+Require "Conversion".
+Require "Definition".
+Require "Etc".
 
-Module ListString.
-  Include ListString.Comparison.
-  Include ListString.Conversion.
-  Include ListString.Definition.
-  Include ListString.Etc.
-End ListString.
+Include ListString.Comparison.
+Include ListString.Conversion.
+Include ListString.Definition.
+Include ListString.Etc.
+
+Module Char.
+  Require "Char".
+  Include ListString.Char.
+End Char.

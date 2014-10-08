@@ -1,5 +1,7 @@
 -R . ListString
 
+Bool.v
+Char.v
 Comparison.v
 Conversion.v
 Definition.v
