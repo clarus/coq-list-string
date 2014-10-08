@@ -1,5 +1,8 @@
 -R . ListString
 
-ListStringComparison.v
+Comparison.v
+Conversion.v
 Definition.v
+Etc.v
 ListString.v
+UnitTests.v
