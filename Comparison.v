@@ -13,12 +13,12 @@ Module Bool.
     | true, true | false, false => Eq
     end.
 
-  Lemma compare_same_is_eq : forall (x : bool), compare x x = Eq.
-    intro x; destruct x; simpl; reflexivity.
-  Qed.
-
   Lemma compare_implies_eq : forall (x y : bool), compare x y = Eq -> x = y.
     intros x y; destruct x; destruct y; simpl; congruence.
+  Qed.
+
+  Lemma compare_same_is_eq : forall (x : bool), compare x x = Eq.
+    intro x; destruct x; simpl; reflexivity.
   Qed.
 End Bool.
 
@@ -43,11 +43,6 @@ Module Ascii.
       Bool.compare x5 y5 >> Bool.compare x6 y6 >> Bool.compare x7 y7 >> Bool.compare x8 y8
     end.
 
-  Lemma compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq.
-    intro x; destruct x as [x0 x1 x2 x3 x4 x5 x6 x7]; simpl.
-    now repeat (rewrite Bool.compare_same_is_eq).
-  Qed.
-
   Lemma compare_implies_eq : forall (x y : Ascii.ascii), compare x y = Eq -> x = y.
     intros x y;
       destruct x as [x0 x1 x2 x3 x4 x5 x6 x7];
@@ -71,6 +66,11 @@ Module Ascii.
     reflexivity.
   Qed.
 
+  Lemma compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq.
+    intro x; destruct x as [x0 x1 x2 x3 x4 x5 x6 x7]; simpl.
+    now repeat (rewrite Bool.compare_same_is_eq).
+  Qed.
+
   Definition eqb (x y : Ascii.ascii) : bool :=
     match compare x y with
     | Eq => true
@@ -86,15 +86,15 @@ Fixpoint compare (x y : t) : comparison :=
   | x :: xs, y :: ys => Ascii.compare x y >> compare xs ys
   end.
 
-Lemma compare_same_is_eq : forall (x : t), compare x x = Eq.
-  intro x; induction x; simpl; trivial.
-  now rewrite Ascii.compare_same_is_eq; rewrite IHx.
-Qed.
-
 Lemma compare_implies_eq : forall (x y : t), compare x y = Eq -> x = y.
   induction x as [|a x HI]; destruct y as [|b y]; simpl; try congruence.
   case_eq (Ascii.compare a b); simpl; try congruence.
   now intros Hab Hxy; rewrite (Ascii.compare_implies_eq _ _ Hab); rewrite (HI _ Hxy).
+Qed.
+
+Lemma compare_same_is_eq : forall (x : t), compare x x = Eq.
+  intro x; induction x; simpl; trivial.
+  now rewrite Ascii.compare_same_is_eq; rewrite IHx.
 Qed.
 
 Definition eqb (x y : t) : bool :=
