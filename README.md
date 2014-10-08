@@ -37,8 +37,8 @@ or import a Coq `string` using the string notation:
 * `Ascii.compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq`
 * `Ascii.eqb (x y : Ascii.ascii) : bool`
 * `compare (x y : t) : comparison`
-* `compare_same_is_eq : forall (x : t), compare x x = Eq`
 * `compare_implies_eq : forall (x y : t), compare x y = Eq -> x = y`
+* `compare_same_is_eq : forall (x : t), compare x x = Eq`
 * `eqb (x y : t) : bool`
 * `eqb_implies_eq : forall (x y : t), eqb x y = true -> x = y`
 * `eqb_same_is_eq : forall (x : t), eqb x x = true`

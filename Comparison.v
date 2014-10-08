@@ -103,13 +103,13 @@ Definition eqb (x y : t) : bool :=
   | _ => false
   end.
 
-Lemma eqb_same_is_eq : forall (x : t), eqb x x = true.
-  now intros; unfold eqb; rewrite compare_same_is_eq.
-Qed.
-
 Lemma eqb_implies_eq : forall (x y : t), eqb x y = true -> x = y.
   intros x y; unfold eqb; case_eq (compare x y); try congruence.
   now intros; apply compare_implies_eq.
+Qed.
+
+Lemma eqb_same_is_eq : forall (x : t), eqb x x = true.
+  now intros; unfold eqb; rewrite compare_same_is_eq.
 Qed.
 
 Definition eq_dec (x y : t) : {x = y} + {x <> y}.
