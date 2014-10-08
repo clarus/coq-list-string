@@ -18,3 +18,6 @@ Fixpoint of_string (s : String.string) : t :=
   | String.EmptyString => []
   | String.String c s => c :: of_string s
   end.
+
+(** Alias. *)
+Definition s := of_string.
