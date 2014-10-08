@@ -3,7 +3,7 @@ Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 
 Require Export ListStringComparison.
-Require Export ListStringDefinition.
+Require Export "Definition".
 
 Import ListNotations.
 
