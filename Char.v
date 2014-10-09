@@ -69,5 +69,11 @@ Definition digit (n : nat) : Ascii.ascii :=
   | 7 => "7"
   | 8 => "8"
   | 9 => "9"
-  | n => Ascii.ascii_of_nat (n - 9 + nat_of_ascii "A")
+  | n => Ascii.ascii_of_nat (n - 10 + nat_of_ascii "A")
+  end.
+
+Definition is_ascii (c : Ascii.ascii) : bool :=
+  match c with
+  | Ascii.Ascii _ _ _ _ _ _ _ false => true
+  | _ => false
   end.

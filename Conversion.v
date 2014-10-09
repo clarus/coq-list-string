@@ -39,7 +39,7 @@ Module OfNat.
       | true => fun _ => [Char.digit n]
       | false => fun pf =>
         let m := NPeano.div n mod in
-        Char.digit (n - 10 * m) :: of_nat_aux mod _ m
+        Char.digit (n - mod * m) :: of_nat_aux mod _ m
     end eq_refl.
   Next Obligation.
     eapply NPeano.Nat.div_lt; auto.
