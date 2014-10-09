@@ -6,6 +6,10 @@ Require Import "Definition".
 
 Import ListNotations.
 
+(** Test if the string contains only ASCII characters. *)
+Definition is_ascii (s : t) : bool :=
+  List.forallb Char.is_ascii s.
+
 Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
   match s with
   | [] => [List.rev' beginning]

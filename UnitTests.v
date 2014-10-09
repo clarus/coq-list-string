@@ -23,6 +23,11 @@ Module Char.
     List.map Char.digit [0; 1; 5; 9; 10; 12; 23] =
       ["0"; "1"; "5"; "9"; "A"; "C" ; "N"] :=
     eq_refl.
+
+  Definition test_is_ascii :
+    List.map Char.is_ascii ["A"; "?"; """"; "010"; "127"; "128"; "255"] =
+      [true; true; true; true; true; false; false] :=
+      eq_refl.
 End Char.
 
 (** * Comparison *)
@@ -65,6 +70,10 @@ Definition test_of_nat_16 :
   eq_refl.
 
 (** * Etc *)
+Definition test_is_ascii :
+  List.map is_ascii [s ""; s "ahah"; "128" :: s "ahah"] = [true; true; false] :=
+  eq_refl.
+
 Definition test_split :
   List.map_pair split [
     (s "", " ");
