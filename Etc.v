@@ -79,6 +79,13 @@ Definition down_case (s : t) : t :=
 Definition up_case (s : t) : t :=
   List.map Char.up_case s.
 
+(** Test if the string is empty. *)
+Definition is_empty (s : t) : bool :=
+  match s with
+  | [] => true
+  | _ :: _ => false
+  end.
+
 Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
   match s with
   | [] => [List.rev' beginning]
@@ -111,4 +118,4 @@ Fixpoint split_limit_aux (s : t) (c : ascii) (beginning : t) (limit : nat)
 (** Split a string at each occurrence of a given character in a list of up to
     [limit] elements. *)
 Definition split_limit (s : t) (c : ascii) (limit : nat) : list t :=
-  split_limit_aux s c [] limit.
+  split_limit_aux s c [] limit.  
