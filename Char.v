@@ -81,6 +81,12 @@ Definition is_ascii (c : Ascii.ascii) : bool :=
   | _ => false
   end.
 
+Definition is_white_space (c : Ascii.ascii) : bool :=
+  match c with
+  | "009" | "010" | "011" | "012" | "013" | " " => true
+  | _ => false
+  end.
+
 (** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
 Definition down_case (c : Ascii.ascii) : Ascii.ascii :=
   let n := Ascii.N_of_ascii c in

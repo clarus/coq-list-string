@@ -6,6 +6,7 @@ Require Import "Comparison".
 Require Import "Definition".
 
 Import ListNotations.
+Local Open Scope char.
 
 (** Test if the string contains only ASCII characters. *)
 Definition is_ascii (s : t) : bool :=
@@ -30,7 +31,45 @@ Definition center (s : t) (width : nat) : t :=
   let l := List.length s in
   let l_left := Div2.div2 (width - l) in
   let l_right := (width - l) - l_left in
-  repeat [" " % char] l_left ++ s ++ repeat [" " % char] l_right.
+  repeat [" "] l_left ++ s ++ repeat [" "] l_right.
+
+Fixpoint chomp (s : t) : t :=
+  match s with
+  | [] => []
+  | ["010"] | ["013"] | ["013"; "010"] => []
+  | c :: s => c :: chomp s
+  end.
+
+(** Remove white spaces at the beginning of a string (\t, \n, \v, \f or \r). *)
+Fixpoint trim_head (s : t) : t :=
+  match s with
+  | [] => []
+  | c :: s' =>
+    if Char.is_white_space c then
+      trim_head s'
+    else
+      s
+  end.
+
+(** Remove white spaces at the end of a string (\t, \n, \v, \f or \r). *)
+Fixpoint trim_tail (s : t) : t :=
+  match s with
+  | [] => []
+  | c :: s =>
+    match trim_tail s with
+    | [] =>
+      if Char.is_white_space c then
+        []
+      else
+        [c]
+    | s => c :: s
+    end
+  end.
+
+(** Remove white spaces at the beginning and the end of a string
+    (\t, \n, \v, \f or \r). *)
+Definition trim (s : t) : t :=
+  trim_head (trim_tail s).
 
 (** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
 Definition down_case (s : t) : t :=

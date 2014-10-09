@@ -29,6 +29,11 @@ Module Char.
       [true; true; true; true; true; false; false] :=
       eq_refl.
 
+  Definition test_is_white_space :
+    List.map Char.is_white_space [" "; "010"; "r"; ","] =
+      [true; true; false; false] :=
+      eq_refl.
+
   Definition test_down_case :
     List.map Char.down_case ["a"; "A"; "g"; "Z"; ","; """"; "128"; "255"] =
       ["a"; "a"; "g"; "z"; ","; """"; "128"; "255"] :=
@@ -97,6 +102,27 @@ Definition test_center :
   List.map_pair center [(s "", 4); (s "a", 4); (s "ab", 4); (s "abcd", 4);
     (s "abcde", 4); (s "ab", 0)] = [
     s "    "; s " a  "; s " ab "; s "abcd"; s "abcde"; s "ab"] :=
+  eq_refl.
+
+Definition test_chomp :
+  List.map chomp [s ""; s "aa"; s "aa "; s "aa" ++ ["010"];
+    s "aa" ++ ["010"; "013"]; s "aa" ++ ["013"; "010"]] =
+    [s ""; s "aa"; s "aa "; s "aa"; s "aa" ++ ["010"]; s "aa"] :=
+  eq_refl.
+
+Definition test_trim_head :
+  List.map trim_head [s ""; s "aa"; s "a "; s " aa"; s "  a"; "011" :: s "aa"] =
+    [s ""; s "aa"; s "a "; s "aa"; s "a"; s "aa"] :=
+  eq_refl.
+
+Definition test_trim_tail :
+  List.map trim_tail [s ""; s "aa"; s "a "; s " aa"; s "a  "; "011" :: s "aa"] =
+    [s ""; s "aa"; s "a"; s " aa"; s "a"; "011" :: s "aa"] :=
+  eq_refl.
+
+Definition test_trim :
+  List.map trim [s ""; s "aa"; s "a "; s " aa"; s "a  "; "011" :: s "aa"] =
+    [s ""; s "aa"; s "a"; s "aa"; s "a"; s "aa"] :=
   eq_refl.
 
 Definition test_down_case :
