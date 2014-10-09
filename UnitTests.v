@@ -28,6 +28,16 @@ Module Char.
     List.map Char.is_ascii ["A"; "?"; """"; "010"; "127"; "128"; "255"] =
       [true; true; true; true; true; false; false] :=
       eq_refl.
+
+  Definition test_down_case :
+    List.map Char.down_case ["a"; "A"; "g"; "Z"; ","; """"; "128"; "255"] =
+      ["a"; "a"; "g"; "z"; ","; """"; "128"; "255"] :=
+      eq_refl.
+
+  Definition test_up_case :
+    List.map Char.up_case ["a"; "A"; "g"; "Z"; ","; """"; "128"; "255"] =
+      ["A"; "A"; "G"; "Z"; ","; """"; "128"; "255"] :=
+      eq_refl.
 End Char.
 
 (** * Comparison *)

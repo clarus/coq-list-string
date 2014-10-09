@@ -1,4 +1,5 @@
-Require Import Strings.Ascii.
+Require Import Coq.NArith.NArith.
+Require Import Coq.Strings.Ascii.
 Require "Bool".
 
 Local Open Scope char.
@@ -57,6 +58,7 @@ Definition eqb (x y : Ascii.ascii) : bool :=
   | _ => false
   end.
 
+(** The character of a digit (0, 1, ..., 9, A, B, ...). *)
 Definition digit (n : nat) : Ascii.ascii :=
   match n with
   | 0 => "0"
@@ -72,8 +74,31 @@ Definition digit (n : nat) : Ascii.ascii :=
   | n => Ascii.ascii_of_nat (n - 10 + nat_of_ascii "A")
   end.
 
+(** Test if the character is in the ASCII range. *)
 Definition is_ascii (c : Ascii.ascii) : bool :=
   match c with
   | Ascii.Ascii _ _ _ _ _ _ _ false => true
   | _ => false
   end.
+
+(** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
+Definition down_case (c : Ascii.ascii) : Ascii.ascii :=
+  let n := Ascii.N_of_ascii c in
+  let n_A := Ascii.N_of_ascii "A" in
+  let n_Z := Ascii.N_of_ascii "Z" in
+  let n_a := Ascii.N_of_ascii "a" in
+  if andb (N.leb n_A n) (N.leb n n_Z) then
+    Ascii.ascii_of_N ((n + n_a) - n_A)
+  else
+    c.
+
+(** Replace lowercase letters by uppercase ones (only characters from a to z are affected). *)
+Definition up_case (c : Ascii.ascii) : Ascii.ascii :=
+  let n := Ascii.N_of_ascii c in
+  let n_a := Ascii.N_of_ascii "a" in
+  let n_z := Ascii.N_of_ascii "z" in
+  let n_A := Ascii.N_of_ascii "A" in
+  if andb (N.leb n_a n) (N.leb n n_z) then
+    Ascii.ascii_of_N ((n + n_A) - n_a)
+  else
+    c.
