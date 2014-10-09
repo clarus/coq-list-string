@@ -12,11 +12,11 @@ Local Open Scope char.
 Definition is_ascii (s : t) : bool :=
   List.forallb Char.is_ascii s.
 
-(** Convert the first character to uppercase. *)
-Definition capitalize (s : t) : t :=
+(** Test if the string is empty. *)
+Definition is_empty (s : t) : bool :=
   match s with
-  | [] => []
-  | c :: s => Char.up_case c :: s
+  | [] => true
+  | _ :: _ => false
   end.
 
 (** Repeat a string [n] times. *)
@@ -32,59 +32,6 @@ Definition center (s : t) (width : nat) : t :=
   let l_left := Div2.div2 (width - l) in
   let l_right := (width - l) - l_left in
   repeat [" "] l_left ++ s ++ repeat [" "] l_right.
-
-Fixpoint chomp (s : t) : t :=
-  match s with
-  | [] => []
-  | ["010"] | ["013"] | ["013"; "010"] => []
-  | c :: s => c :: chomp s
-  end.
-
-(** Remove white spaces at the beginning of a string (\t, \n, \v, \f or \r). *)
-Fixpoint trim_head (s : t) : t :=
-  match s with
-  | [] => []
-  | c :: s' =>
-    if Char.is_white_space c then
-      trim_head s'
-    else
-      s
-  end.
-
-(** Remove white spaces at the end of a string (\t, \n, \v, \f or \r). *)
-Fixpoint trim_tail (s : t) : t :=
-  match s with
-  | [] => []
-  | c :: s =>
-    match trim_tail s with
-    | [] =>
-      if Char.is_white_space c then
-        []
-      else
-        [c]
-    | s => c :: s
-    end
-  end.
-
-(** Remove white spaces at the beginning and the end of a string
-    (\t, \n, \v, \f or \r). *)
-Definition trim (s : t) : t :=
-  trim_head (trim_tail s).
-
-(** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
-Definition down_case (s : t) : t :=
-  List.map Char.down_case s.
-
-(** Replace lowercase letters by uppercase ones (only characters from a to z are affected). *)
-Definition up_case (s : t) : t :=
-  List.map Char.up_case s.
-
-(** Test if the string is empty. *)
-Definition is_empty (s : t) : bool :=
-  match s with
-  | [] => true
-  | _ :: _ => false
-  end.
 
 Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
   match s with

@@ -1,10 +1,12 @@
 -R . ListString
 
 Bool.v
+Case.v
 Char.v
 Comparison.v
 Conversion.v
 Definition.v
 Etc.v
 ListString.v
+Trim.v
 UnitTests.v
