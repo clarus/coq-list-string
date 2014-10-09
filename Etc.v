@@ -10,6 +10,13 @@ Import ListNotations.
 Definition is_ascii (s : t) : bool :=
   List.forallb Char.is_ascii s.
 
+(** Convert the first character to uppercase. *)
+Definition capitalize (s : t) : t :=
+  match s with
+  | [] => []
+  | c :: s => Char.up_case c :: s
+  end.
+
 (** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
 Definition down_case (s : t) : t :=
   List.map Char.down_case s.
