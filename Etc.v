@@ -10,6 +10,14 @@ Import ListNotations.
 Definition is_ascii (s : t) : bool :=
   List.forallb Char.is_ascii s.
 
+(** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
+Definition down_case (s : t) : t :=
+  List.map Char.down_case s.
+
+(** Replace lowercase letters by uppercase ones (only characters from a to z are affected). *)
+Definition up_case (s : t) : t :=
+  List.map Char.up_case s.
+
 Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
   match s with
   | [] => [List.rev' beginning]

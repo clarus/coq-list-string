@@ -84,6 +84,14 @@ Definition test_is_ascii :
   List.map is_ascii [s ""; s "ahah"; "128" :: s "ahah"] = [true; true; false] :=
   eq_refl.
 
+Definition test_down_case :
+  List.map down_case [s ""; s "aAgZ,3%"] = [s ""; s "aagz,3%"] :=
+  eq_refl.
+
+Definition test_up_case :
+  List.map up_case [s ""; s "aAgZ,3%"] = [s ""; s "AAGZ,3%"] :=
+  eq_refl.
+
 Definition test_split :
   List.map_pair split [
     (s "", " ");
