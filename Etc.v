@@ -1,3 +1,4 @@
+Require Coq.Arith.Div2.
 Require Import Coq.Lists.List.
 Require Import Coq.Strings.Ascii.
 Require "Char".
@@ -16,6 +17,20 @@ Definition capitalize (s : t) : t :=
   | [] => []
   | c :: s => Char.up_case c :: s
   end.
+
+(** Repeat a string [n] times. *)
+Fixpoint repeat (s : t) (n : nat) : t :=
+  match n with
+  | O => []
+  | S n => s ++ repeat s n
+  end.
+
+(** Center a string on a line of width [width], with white space paddings. *)
+Definition center (s : t) (width : nat) : t :=
+  let l := List.length s in
+  let l_left := Div2.div2 (width - l) in
+  let l_right := (width - l) - l_left in
+  repeat [" " % char] l_left ++ s ++ repeat [" " % char] l_right.
 
 (** Replace uppercase letters by lowercase ones (only characters from a to z are affected). *)
 Definition down_case (s : t) : t :=

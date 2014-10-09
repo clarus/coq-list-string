@@ -88,6 +88,17 @@ Definition test_capitalize :
   List.map capitalize [s ""; s "A"; s "aAgZ,3%"] = [s ""; s "A"; s "AAgZ,3%"] :=
   eq_refl.
 
+Definition test_repeat :
+  List.map_pair repeat [(s "", 0); (s "", 2); (s "ab", 0); (s "ab", 2)] =
+    [s ""; s ""; s ""; s "abab"] :=
+    eq_refl.
+
+Definition test_center :
+  List.map_pair center [(s "", 4); (s "a", 4); (s "ab", 4); (s "abcd", 4);
+    (s "abcde", 4); (s "ab", 0)] = [
+    s "    "; s " a  "; s " ab "; s "abcd"; s "abcde"; s "ab"] :=
+  eq_refl.
+
 Definition test_down_case :
   List.map down_case [s ""; s "aAgZ,3%"] = [s ""; s "aagz,3%"] :=
   eq_refl.
