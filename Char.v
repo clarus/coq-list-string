@@ -80,3 +80,28 @@ Definition up_case (c : Ascii.ascii) : Ascii.ascii :=
     Ascii.ascii_of_N ((n + n_A) - n_a)
   else
     c.
+
+(** * Special characters. *)
+(** Bell. *)
+Definition a : Ascii.ascii := "007".
+
+(** Backspace. *)
+Definition b : Ascii.ascii := "008".
+
+(** Horizontal tabulation. *)
+Definition t : Ascii.ascii := "009".
+
+(** Line feed. *)
+Definition n : Ascii.ascii := "010".
+
+(** Vertical tabulation. *)
+Definition v : Ascii.ascii := "011".
+
+(** Form feed. *)
+Definition f : Ascii.ascii := "012".
+
+(** Carriage return. *)
+Definition r : Ascii.ascii := "013".
+
+(** Escape. *)
+Definition e : Ascii.ascii := "027".

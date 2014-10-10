@@ -72,3 +72,16 @@ or import a Coq `string` using the string notation:
 * `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.
 * `Char.is_white_space (c : Ascii.ascii) : bool` Test if the character is a white space (space, \t, \n, \v, \f or \r).
 * `Char.up_case (c : Ascii.ascii) : Ascii.ascii` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
+
+Special characters:
+
+command  | character
+---------|----------
+`Char.a` | bell
+`Char.b` | backspace
+`Char.t` | horizontal tabulation
+`Char.n` | line feed
+`Char.v` | vertical tabulation
+`Char.f` | form feed
+`Char.r` | carriage return
+`Char.e` | escape
