@@ -19,6 +19,14 @@ Module List.
     | (x, y) :: l => f x y :: map_pair _ _ _ f l
     end.
   Arguments map_pair [A B C] _ _.
+
+  Fixpoint map_triple (A B C D : Type) (f : A -> B -> C -> D)
+    (l : list (A * B * C)) : list D :=
+    match l with
+    | [] => []
+    | (x, y, z) :: l => f x y z :: map_triple _ _ _ _ f l
+    end.
+  Arguments map_triple [A B C D] _ _.
 End List.
 
 Module Case.
@@ -146,7 +154,19 @@ Module Etc.
       [s "grr"]] :=
     eq_refl.
 
-  (* TODO: teset split_limit *)
+  Definition test_split_limit :
+    List.map_triple split_limit [
+      (s "", " ", 2);
+      (s "go stop go", " ", 0);
+      (s "go stop go ", " ", 3);
+      (s "go stop go  ", " ", 1);
+      (s "grr", " ", 4)] = [
+      [s ""];
+      [];
+      [s "go"; s "stop"; s "go "];
+      [s "go stop go  "];
+      [s "grr"]] :=
+    eq_refl.
 End Etc.
 
 Module Trim.

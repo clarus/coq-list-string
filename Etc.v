@@ -51,6 +51,7 @@ Fixpoint split_limit_aux (s : t) (c : ascii) (beginning : t) (limit : nat)
   : list t :=
   match limit with
   | O => []
+  | S O => [List.rev' beginning ++ s]
   | S limit =>
     match s with
     | [] => [List.rev' beginning]
@@ -65,4 +66,4 @@ Fixpoint split_limit_aux (s : t) (c : ascii) (beginning : t) (limit : nat)
 (** Split a string at each occurrence of a given character in a list of up to
     [limit] elements. *)
 Definition split_limit (s : t) (c : ascii) (limit : nat) : list t :=
-  split_limit_aux s c [] limit.  
+  split_limit_aux s c [] limit.
