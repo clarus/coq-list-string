@@ -5,6 +5,7 @@ Require "Char".
 Require Import "Definition".
 
 Import ListNotations.
+Import LString.
 Local Open Scope char.
 
 (** Remove one end of line at the end, if present (can be \n, \r or \r\n). *)

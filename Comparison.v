@@ -5,6 +5,7 @@ Require "Char".
 Require Import "Definition".
 
 Import ListNotations.
+Import LString.
 
 (** Total order on strings. *)
 Fixpoint compare (x y : t) : comparison :=

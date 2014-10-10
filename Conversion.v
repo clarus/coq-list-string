@@ -5,6 +5,7 @@ Require "Char".
 Require Import "Definition".
 
 Import ListNotations.
+Import LString.
 
 (** Export to a standard string. *)
 Fixpoint to_string (s : t) : String.string :=

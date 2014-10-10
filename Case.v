@@ -3,6 +3,7 @@ Require "Char".
 Require Import "Definition".
 
 Import ListNotations.
+Import LString.
 
 (** Convert the first character to uppercase. *)
 Definition capitalize (s : t) : t :=

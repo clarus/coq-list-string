@@ -6,6 +6,7 @@ Require Import "Comparison".
 Require Import "Definition".
 
 Import ListNotations.
+Import LString.
 Local Open Scope char.
 
 (** Test if the string contains only ASCII characters. *)

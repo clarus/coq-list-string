@@ -8,7 +8,7 @@ Require "Trim".
 Include LString.Case.
 Include LString.Comparison.
 Include LString.Conversion.
-Include LString.Definition.
+Include LString.Definition.LString.
 Include LString.Etc.
 Include LString.Trim.
 
