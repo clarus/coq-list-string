@@ -41,9 +41,8 @@ or import a Coq `string` using the string notation:
 * `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.
 * `Char.is_white_space (c : Ascii.ascii) : bool` Test if the character is a white space (space, \t, \n, \v, \f or \r).
 * `Char.up_case (c : Ascii.ascii) : Ascii.ascii` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
-
 * `capitalize (s : t) : t` Convert the first character to uppercase.
-* `center (s : t) (width : nat) : t` Center a string on a line of width [width], with white space paddings.
+* `center (s : t) (width : nat) : t` Center a string on a line of width `width`, with white space paddings.
 * `chomp (s : t) : t` Remove one end of line at the end, if present (can be \n, \r or \r\n).
 * `compare (x y : t) : comparison` Total order on strings.
   * `compare_implies_eq : forall (x y : t), compare x y = Eq -> x = y`
@@ -55,14 +54,14 @@ or import a Coq `string` using the string notation:
   * `eqb_same_is_eq : forall (x : t), eqb x x = true`
 * `is_ascii (s : t) : bool` Test if the string contains only ASCII characters.
 * `is_empty (s : t) : bool` Test if the string is empty.
-* `of_nat (mod : nat) (H : 1 < mod) (n : nat) : t` Convert an integer to a string in base [mod].
+* `of_nat (mod : nat) (H : 1 < mod) (n : nat) : t` Convert an integer to a string in base `mod`.
 * `of_nat_2 (n : nat) : t` Convert an integer to a string in base 2.
 * `of_nat_8 (n : nat) : t` Convert an integer to a string in base 8.
 * `of_nat_10 (n : nat) : t` Convert an integer to a string in base 10.
 * `of_nat_16 (n : nat) : t` Convert an integer to a string in base 16.
-* `of_string (s : String.string) : t` Import a standard string. See the [s] alias.
-* `repeat (s : t) (n : nat) : t` Repeat a string [n] times.
-* `s (s : String.string) : t` Alias for [of_string].
+* `of_string (s : String.string) : t` Import a standard string. See the `s` alias.
+* `repeat (s : t) (n : nat) : t` Repeat a string `n` times.
+* `s (s : String.string) : t` Alias for `of_string`.
 * `split (s : t) (c : ascii) : list t` Split a string at each occurrence of a given character. 
 * `split_limit (s : t) (c : ascii) (limit : nat) : list t` Split a string at each occurrence of a given character in a list of up to [limit] elements.
 * `t : Set := list Ascii.ascii` A string is a list of characters.
