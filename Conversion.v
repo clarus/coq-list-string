@@ -13,7 +13,7 @@ Fixpoint to_string (s : t) : String.string :=
   | c :: s => String.String c (to_string s)
   end.
 
-(** Import a standard string. See the [s] alias. *)
+(** Import a standard string. See the alias [s]. *)
 Fixpoint of_string (s : String.string) : t :=
   match s with
   | String.EmptyString => []

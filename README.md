@@ -32,15 +32,6 @@ or import a Coq `string` using the string notation:
     LString.s "hello" : LString.t
 
 ## Reference
-* `Char.compare (x y : Ascii.ascii) : comparison` Total order on characters.
-  * `Char.compare_implies_eq : forall (x y : Ascii.ascii), compare x y = Eq -> x = y`
-  * `Char.compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq`
-* `Char.digit (n : nat) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
-* `Char.down_case (c : Ascii.ascii) : Ascii.ascii` Replace uppercase letters by lowercase ones (only characters from a to z are affected).
-* `Char.eqb (x y : Ascii.ascii) : bool` Test if two characters are equal.
-* `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.
-* `Char.is_white_space (c : Ascii.ascii) : bool` Test if the character is a white space (space, \t, \n, \v, \f or \r).
-* `Char.up_case (c : Ascii.ascii) : Ascii.ascii` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
 * `capitalize (s : t) : t` Convert the first character to uppercase.
 * `center (s : t) (width : nat) : t` Center a string on a line of width `width`, with white space paddings.
 * `chomp (s : t) : t` Remove one end of line at the end, if present (can be \n, \r or \r\n).
@@ -59,7 +50,7 @@ or import a Coq `string` using the string notation:
 * `of_nat_8 (n : nat) : t` Convert an integer to a string in base 8.
 * `of_nat_10 (n : nat) : t` Convert an integer to a string in base 10.
 * `of_nat_16 (n : nat) : t` Convert an integer to a string in base 16.
-* `of_string (s : String.string) : t` Import a standard string. See the `s` alias.
+* `of_string (s : String.string) : t` Import a standard string. See the alias `s`.
 * `repeat (s : t) (n : nat) : t` Repeat a string `n` times.
 * `s (s : String.string) : t` Alias for `of_string`.
 * `split (s : t) (c : ascii) : list t` Split a string at each occurrence of a given character. 
@@ -70,3 +61,14 @@ or import a Coq `string` using the string notation:
 * `trim_head (s : t) : t` Remove white spaces at the beginning of a string (spaces, \t, \n, \v, \f or \r).
 * `trim_tail (s : t) : t` Remove white spaces at the end of a string (spaces, \t, \n, \v, \f or \r).
 * `up_case (s : t) : t` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
+
+### Char
+* `Char.compare (x y : Ascii.ascii) : comparison` Total order on characters.
+  * `Char.compare_implies_eq : forall (x y : Ascii.ascii), compare x y = Eq -> x = y`
+  * `Char.compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq`
+* `Char.digit (n : nat) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
+* `Char.down_case (c : Ascii.ascii) : Ascii.ascii` Replace uppercase letters by lowercase ones (only characters from a to z are affected).
+* `Char.eqb (x y : Ascii.ascii) : bool` Test if two characters are equal.
+* `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.
+* `Char.is_white_space (c : Ascii.ascii) : bool` Test if the character is a white space (space, \t, \n, \v, \f or \r).
+* `Char.up_case (c : Ascii.ascii) : Ascii.ascii` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
