@@ -31,6 +31,13 @@ or import a Coq `string` using the string notation:
 
     LString.s "hello" : LString.t
 
+To have a nice pretty-printing of the strings, add:
+
+    Require Import Coq.Strings.Ascii.
+    Local Open Scope char.
+
+at the beginning of your files.
+
 ## Reference
 * `capitalize (s : t) : t` Convert the first character to uppercase.
 * `center (s : t) (width : nat) : t` Center a string on a line of width `width`, with white space paddings.
