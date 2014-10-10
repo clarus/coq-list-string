@@ -1,4 +1,4 @@
--R . ListString
+-R . LString
 
 Bool.v
 Case.v
@@ -7,6 +7,6 @@ Comparison.v
 Conversion.v
 Definition.v
 Etc.v
-ListString.v
+LString.v
 Trim.v
 UnitTests.v
