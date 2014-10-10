@@ -6,6 +6,7 @@ Require Import "Definition".
 
 Import ListNotations.
 
+(** Total order on strings. *)
 Fixpoint compare (x y : t) : comparison :=
   match x, y with
   | [], [] => Eq
@@ -29,6 +30,7 @@ Lemma compare_same_is_eq : forall (x : t), compare x x = Eq.
   now rewrite Char.compare_same_is_eq; rewrite IHx.
 Qed.
 
+(** Test if two strings are equal. *)
 Definition eqb (x y : t) : bool :=
   match compare x y with
   | Eq => true
@@ -44,6 +46,7 @@ Lemma eqb_same_is_eq : forall (x : t), eqb x x = true.
   now intros; unfold eqb; rewrite compare_same_is_eq.
 Qed.
 
+(** Decide the equality of two strings. *)
 Definition eq_dec (x y : t) : {x = y} + {x <> y}.
   case_eq (eqb x y); intro Heqb; [left | right].
   - now apply eqb_implies_eq.

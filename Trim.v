@@ -15,7 +15,7 @@ Fixpoint chomp (s : t) : t :=
   | c :: s => c :: chomp s
   end.
 
-(** Remove white spaces at the beginning of a string (\t, \n, \v, \f or \r). *)
+(** Remove white spaces at the beginning of a string (spaces, \t, \n, \v, \f or \r). *)
 Fixpoint trim_head (s : t) : t :=
   match s with
   | [] => []
@@ -26,7 +26,7 @@ Fixpoint trim_head (s : t) : t :=
       s
   end.
 
-(** Remove white spaces at the end of a string (\t, \n, \v, \f or \r). *)
+(** Remove white spaces at the end of a string (spaces, \t, \n, \v, \f or \r). *)
 Fixpoint trim_tail (s : t) : t :=
   match s with
   | [] => []
@@ -42,6 +42,6 @@ Fixpoint trim_tail (s : t) : t :=
   end.
 
 (** Remove white spaces at the beginning and the end of a string
-    (\t, \n, \v, \f or \r). *)
+    (spaces, \t, \n, \v, \f or \r). *)
 Definition trim (s : t) : t :=
   trim_head (trim_tail s).

@@ -16,6 +16,7 @@ Lemma compose_compare_eq : forall (x y : comparison), compose_compare x y = Eq -
   intros x y; destruct x; destruct y; simpl; split; congruence.
 Qed.
 
+(** Total order on characters. *)
 Definition compare (x y : Ascii.ascii) : comparison :=
   match x, y with
   | Ascii.Ascii x1 x2 x3 x4 x5 x6 x7 x8,
@@ -52,6 +53,7 @@ Lemma compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq.
   now repeat (rewrite Bool.compare_same_is_eq).
 Qed.
 
+(** Test if two characters are equal. *)
 Definition eqb (x y : Ascii.ascii) : bool :=
   match compare x y with
   | Eq => true
@@ -81,6 +83,7 @@ Definition is_ascii (c : Ascii.ascii) : bool :=
   | _ => false
   end.
 
+(** Test if the character is a white space (space, \t, \n, \v, \f or \r). *)
 Definition is_white_space (c : Ascii.ascii) : bool :=
   match c with
   | "009" | "010" | "011" | "012" | "013" | " " => true

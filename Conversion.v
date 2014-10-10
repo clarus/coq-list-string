@@ -13,14 +13,14 @@ Fixpoint to_string (s : t) : String.string :=
   | c :: s => String.String c (to_string s)
   end.
 
-(** Import a standard string. *)
+(** Import a standard string. See the [s] alias. *)
 Fixpoint of_string (s : String.string) : t :=
   match s with
   | String.EmptyString => []
   | String.String c s => c :: of_string s
   end.
 
-(** Alias. *)
+(** Alias for [of_string]. *)
 Definition s := of_string.
 
 Module OfNat.
@@ -49,24 +49,29 @@ Module OfNat.
   Defined.
 End OfNat.
 
+(** Convert an integer to a string in base [mod]. *)
 Definition of_nat (mod : nat) (H : 1 < mod) (n : nat) : t :=
   List.rev' (OfNat.of_nat_aux mod H n).
 
+(** Convert an integer to a string in base 2. *)
 Definition of_nat_2 (n : nat) : t.
   refine (of_nat 2 _ n).
   repeat constructor.
 Defined.
 
+(** Convert an integer to a string in base 8. *)
 Definition of_nat_8 (n : nat) : t.
   refine (of_nat 8 _ n).
   repeat constructor.
 Defined.
 
+(** Convert an integer to a string in base 10. *)
 Definition of_nat_10 (n : nat) : t.
   refine (of_nat 10 _ n).
   repeat constructor.
 Defined.
 
+(** Convert an integer to a string in base 16. *)
 Definition of_nat_16 (n : nat) : t.
   refine (of_nat 16 _ n).
   repeat constructor.
