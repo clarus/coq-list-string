@@ -1,4 +1,4 @@
-# coq-list-string
+# ![Logo](https://raw.githubusercontent.com/clarus/icons/master/typewriter-48.png) List String
 Strings implemented as lists. Finally.
 
 ## Install
