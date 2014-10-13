@@ -34,6 +34,14 @@ Definition center (s : t) (width : nat) : t :=
   let l_right := (width - l) - l_left in
   repeat [" "] l_left ++ s ++ repeat [" "] l_right.
 
+(** Concatenate the list of strings [l] with the separator [separator]. *)
+Fixpoint join (separator : t) (l : list t) : t :=
+  match l with
+  | [] => []
+  | [s] => s
+  | s :: l => s ++ separator ++ join separator l
+  end.
+
 Fixpoint split_aux (s : t) (c : ascii) (beginning : t) : list t :=
   match s with
   | [] => [List.rev' beginning]

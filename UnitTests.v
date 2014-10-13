@@ -140,6 +140,18 @@ Module Etc.
       s "    "; s " a  "; s " ab "; s "abcd"; s "abcde"; s "ab"] :=
     eq_refl.
 
+  Definition test_join :
+    List.map_pair join [
+      (s "", []);
+      (s ", ", []);
+      (s "", [s "hello"; s "world"]);
+      (s ", ", [s "hello"; s "world"])] = [
+      s "";
+      s "";
+      s "helloworld";
+      s "hello, world"] :=
+    eq_refl.
+
   Definition test_split :
     List.map_pair split [
       (s "", " ");

@@ -52,6 +52,7 @@ at the beginning of your files.
   * `eqb_same_is_eq : forall (x : t), eqb x x = true`
 * `is_ascii (s : t) : bool` Test if the string contains only ASCII characters.
 * `is_empty (s : t) : bool` Test if the string is empty.
+* `join (separator : t) (l : list t) : t` Concatenate the list of strings `l` with the separator `separator`.
 * `of_nat (mod : nat) (H : 1 < mod) (n : nat) : t` Convert an integer to a string in base `mod`.
 * `of_nat_2 (n : nat) : t` Convert an integer to a string in base 2.
 * `of_nat_8 (n : nat) : t` Convert an integer to a string in base 8.
