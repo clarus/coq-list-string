@@ -1,4 +1,4 @@
-# ![Logo](http://clarus.me/tmp/logo_coq-list-string.png) List String
+# ![Logo](https://raw.githubusercontent.com/clarus/icons/master/typewriter-48.png) List String
 Strings implemented as lists. Finally.
 
 ## Install
