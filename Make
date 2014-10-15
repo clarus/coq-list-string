@@ -1,11 +1,11 @@
 -R . LString
 
+All.v
 Bool.v
 Case.v
 Char.v
 Comparison.v
 Conversion.v
-Definition.v
 Etc.v
 LString.v
 Trim.v

@@ -3,7 +3,7 @@ Require Import Coq.Lists.List.
 Require Import Coq.Strings.Ascii.
 Require "Char".
 Require Import "Comparison".
-Require Import "Definition".
+Require Import "LString".
 
 Import ListNotations.
 Import LString.
