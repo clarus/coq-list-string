@@ -53,7 +53,8 @@ at the beginning of your files.
 * `is_ascii (s : t) : bool` Test if the string contains only ASCII characters.
 * `is_empty (s : t) : bool` Test if the string is empty.
 * `join (separator : t) (l : list t) : t` Concatenate the list of strings `l` with the separator `separator`.
-* `of_nat (mod : nat) (H : 1 < mod) (n : nat) : t` Convert an integer to a string in base `mod`.
+* `of_n (base : N) (digits : nat) (n : N) : t` Convert an integer to a string in base `base` with up to `digits` digits.
+* `of_nat (base : nat) (H : 1 < base) (n : nat) : t` Convert an integer to a string in base `base`.
 * `of_nat_2 (n : nat) : t` Convert an integer to a string in base 2.
 * `of_nat_8 (n : nat) : t` Convert an integer to a string in base 8.
 * `of_nat_10 (n : nat) : t` Convert an integer to a string in base 10.
@@ -74,7 +75,7 @@ at the beginning of your files.
 * `Char.compare (x y : Ascii.ascii) : comparison` Total order on characters.
   * `Char.compare_implies_eq : forall (x y : Ascii.ascii), compare x y = Eq -> x = y`
   * `Char.compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq`
-* `Char.digit (n : nat) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
+* `Char.digit (n : N) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
 * `Char.down_case (c : Ascii.ascii) : Ascii.ascii` Replace uppercase letters by lowercase ones (only characters from a to z are affected).
 * `Char.eqb (x y : Ascii.ascii) : bool` Test if two characters are equal.
 * `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.

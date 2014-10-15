@@ -1,4 +1,5 @@
 Require Import Coq.Lists.List.
+Require Import Coq.NArith.NArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 Require "Char".
@@ -24,6 +25,23 @@ Fixpoint of_string (s : String.string) : t :=
 (** Alias for [of_string]. *)
 Definition s := of_string.
 
+Fixpoint of_n_aux (base : N) (digits : nat) (n : N) : t :=
+  match digits with
+  | O => []
+  | S digits =>
+    if N.eqb n 0 then
+      []
+    else
+      Char.digit (N.modulo n base) :: of_n_aux base digits (N.div n base)
+  end.
+
+(** Convert an integer to a string in base [base] with up to [digits] digits. *)
+Definition of_n (base : N) (digits : nat) (n : N) : t :=
+  if N.eqb n 0 then
+    s "0"
+  else
+    List.rev' (of_n_aux base digits n).
+
 Module OfNat.
   Require Import Program.
   Import Arith Div2.
@@ -35,24 +53,24 @@ Module OfNat.
     eapply neq_0_lt. congruence.
   Qed.
 
-  Program Fixpoint of_nat_aux (mod : nat) (_ : 1 < mod) (n : nat) {measure n} : t :=
-    match NPeano.ltb n mod as x return NPeano.ltb n mod = x -> t with
-      | true => fun _ => [Char.digit n]
+  Program Fixpoint of_nat_aux (base : nat) (_ : 1 < base) (n : nat) {measure n} : t :=
+    match NPeano.ltb n base as x return NPeano.ltb n base = x -> t with
+      | true => fun _ => [Char.digit (N.of_nat n)]
       | false => fun pf =>
-        let m := NPeano.div n mod in
-        Char.digit (n - mod * m) :: of_nat_aux mod _ m
+        let m := NPeano.div n base in
+        Char.digit (N.of_nat (n - base * m)) :: of_nat_aux base _ m
     end eq_refl.
   Next Obligation.
     eapply NPeano.Nat.div_lt; auto.
-    apply of_nat_lemma with (m := mod); trivial.
+    apply of_nat_lemma with (m := base); trivial.
     intro Hlt.
     assert (Htrue := proj2 (NPeano.ltb_lt _ _) Hlt); congruence.
   Defined.
 End OfNat.
 
-(** Convert an integer to a string in base [mod]. *)
-Definition of_nat (mod : nat) (H : 1 < mod) (n : nat) : t :=
-  List.rev' (OfNat.of_nat_aux mod H n).
+(** Convert an integer to a string in base [base]. *)
+Definition of_nat (base : nat) (H : 1 < base) (n : nat) : t :=
+  List.rev' (OfNat.of_nat_aux base H n).
 
 (** Convert an integer to a string in base 2. *)
 Definition of_nat_2 (n : nat) : t.

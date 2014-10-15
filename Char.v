@@ -3,6 +3,7 @@ Require Import Coq.Strings.Ascii.
 Require "Bool".
 
 Local Open Scope char.
+Local Open Scope N.
 
 (** Total order on characters. *)
 Definition compare (x y : Ascii.ascii) : comparison :=
@@ -30,7 +31,7 @@ Definition eqb (x y : Ascii.ascii) : bool :=
   end.
 
 (** The character of a digit (0, 1, ..., 9, A, B, ...). *)
-Definition digit (n : nat) : Ascii.ascii :=
+Definition digit (n : N) : Ascii.ascii :=
   match n with
   | 0 => "0"
   | 1 => "1"
@@ -42,7 +43,7 @@ Definition digit (n : nat) : Ascii.ascii :=
   | 7 => "7"
   | 8 => "8"
   | 9 => "9"
-  | n => Ascii.ascii_of_nat (n - 10 + nat_of_ascii "A")
+  | n => Ascii.ascii_of_N (n - 10 + N_of_ascii "A")
   end.
 
 (** Test if the character is in the ASCII range. *)

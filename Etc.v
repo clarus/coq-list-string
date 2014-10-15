@@ -1,4 +1,3 @@
-Require Coq.Arith.Div2.
 Require Import Coq.Lists.List.
 Require Import Coq.Strings.Ascii.
 Require "Char".

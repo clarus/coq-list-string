@@ -1,9 +1,11 @@
 Require Import Coq.Lists.List.
+Require Import Coq.NArith.NArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 
 Import ListNotations.
 Local Open Scope char.
+Local Open Scope N.
 
 Module Sugar.
   Require "Conversion".
@@ -97,23 +99,95 @@ Module Conversion.
       ["h"; "e"; "l"; "l"; "o"]] :=
     eq_refl.
 
+  Definition test_of_n :
+    List.map_triple of_n [
+      (2, 10%nat, 0);
+      (2, 10%nat, 1);
+      (2, 10%nat, 2);
+      (2, 10%nat, 3);
+      (2, 10%nat, 12);
+      (2, 10%nat, 23);
+
+      (8, 10%nat, 0);
+      (8, 10%nat, 1);
+      (8, 10%nat, 2);
+      (8, 10%nat, 3);
+      (8, 10%nat, 12);
+      (8, 10%nat, 23);
+
+      (10, 10%nat, 0);
+      (10, 10%nat, 1);
+      (10, 10%nat, 2);
+      (10, 10%nat, 3);
+      (10, 10%nat, 12);
+      (10, 10%nat, 23);
+
+      (16, 10%nat, 0);
+      (16, 10%nat, 1);
+      (16, 10%nat, 2);
+      (16, 10%nat, 3);
+      (16, 10%nat, 12);
+      (16, 10%nat, 23);
+
+      (2, 3%nat, 0);
+      (2, 3%nat, 1);
+      (2, 3%nat, 2);
+      (2, 3%nat, 3);
+      (2, 3%nat, 12);
+      (2, 3%nat, 23)] = [
+      s "0";
+      s "1";
+      s "10";
+      s "11";
+      s "1100";
+      s "10111";
+
+      s "0";
+      s "1";
+      s "2";
+      s "3";
+      s "14";
+      s "27";
+
+      s "0";
+      s "1";
+      s "2";
+      s "3";
+      s "12";
+      s "23";
+
+      s "0";
+      s "1";
+      s "2";
+      s "3";
+      s "C";
+      s "17";
+
+      s "0";
+      s "1";
+      s "10";
+      s "11";
+      s "100";
+      s "111"] :=
+    eq_refl.
+
   Definition test_of_nat_2 :
-    List.map of_nat_2 [0; 1; 2; 3; 12; 23] =
+    List.map of_nat_2 [0; 1; 2; 3; 12; 23] % nat =
       [s "0"; s "1"; s "10"; s "11"; s "1100"; s "10111"] :=
     eq_refl.
 
   Definition test_of_nat_8 :
-    List.map of_nat_8 [0; 1; 2; 3; 12; 23] =
+    List.map of_nat_8 [0; 1; 2; 3; 12; 23] % nat =
       [s "0"; s "1"; s "2"; s "3"; s "14"; s "27"] :=
     eq_refl.
 
   Definition test_of_nat_10 :
-    List.map of_nat_10 [0; 1; 2; 3; 12; 23] =
+    List.map of_nat_10 [0; 1; 2; 3; 12; 23] % nat =
       [s "0"; s "1"; s "2"; s "3"; s "12"; s "23"] :=
     eq_refl.
 
   Definition test_of_nat_16 :
-    List.map of_nat_16 [0; 1; 2; 3; 12; 23] =
+    List.map of_nat_16 [0; 1; 2; 3; 12; 23] % nat =
       [s "0"; s "1"; s "2"; s "3"; s "C"; s "17"] :=
     eq_refl.
 End Conversion.
@@ -130,13 +204,13 @@ Module Etc.
     eq_refl.
 
   Definition test_repeat :
-    List.map_pair repeat [(s "", 0); (s "", 2); (s "ab", 0); (s "ab", 2)] =
+    List.map_pair repeat [(s "", 0); (s "", 2); (s "ab", 0); (s "ab", 2)] % nat =
       [s ""; s ""; s ""; s "abab"] :=
       eq_refl.
 
   Definition test_center :
     List.map_pair center [(s "", 4); (s "a", 4); (s "ab", 4); (s "abcd", 4);
-      (s "abcde", 4); (s "ab", 0)] = [
+      (s "abcde", 4); (s "ab", 0)] % nat = [
       s "    "; s " a  "; s " ab "; s "abcd"; s "abcde"; s "ab"] :=
     eq_refl.
 
@@ -172,7 +246,7 @@ Module Etc.
       (s "go stop go", " ", 0);
       (s "go stop go ", " ", 3);
       (s "go stop go  ", " ", 1);
-      (s "grr", " ", 4)] = [
+      (s "grr", " ", 4)] % nat = [
       [s ""];
       [];
       [s "go"; s "stop"; s "go "];
