@@ -1,5 +1,6 @@
 Require Import Coq.Lists.List.
 Require Import Coq.NArith.NArith.
+Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 
@@ -99,8 +100,8 @@ Module Conversion.
       ["h"; "e"; "l"; "l"; "o"]] :=
     eq_refl.
 
-  Definition test_of_n :
-    List.map_triple of_n [
+  Definition test_of_N :
+    List.map_triple of_N [
       (2, 10%nat, 0);
       (2, 10%nat, 1);
       (2, 10%nat, 2);
@@ -168,6 +169,78 @@ Module Conversion.
       s "10";
       s "11";
       s "100";
+      s "111"] :=
+    eq_refl.
+
+  Definition test_of_Z :
+    List.map_triple of_Z [
+      (2, 10%nat, 0%Z);
+      (2, 10%nat, 1%Z);
+      (2, 10%nat, 2%Z);
+      (2, 10%nat, (-3)%Z);
+      (2, 10%nat, (-12)%Z);
+      (2, 10%nat, 23%Z);
+
+      (8, 10%nat, 0%Z);
+      (8, 10%nat, 1%Z);
+      (8, 10%nat, 2%Z);
+      (8, 10%nat, (-3)%Z);
+      (8, 10%nat, (-12)%Z);
+      (8, 10%nat, 23%Z);
+
+      (10, 10%nat, 0%Z);
+      (10, 10%nat, 1%Z);
+      (10, 10%nat, 2%Z);
+      (10, 10%nat, (-3)%Z);
+      (10, 10%nat, (-12)%Z);
+      (10, 10%nat, 23%Z);
+
+      (16, 10%nat, 0%Z);
+      (16, 10%nat, 1%Z);
+      (16, 10%nat, 2%Z);
+      (16, 10%nat, (-3)%Z);
+      (16, 10%nat, (-12)%Z);
+      (16, 10%nat, 23%Z);
+
+      (2, 3%nat, 0%Z);
+      (2, 3%nat, 1%Z);
+      (2, 3%nat, 2%Z);
+      (2, 3%nat, (-3)%Z);
+      (2, 3%nat, (-12)%Z);
+      (2, 3%nat, 23%Z)] = [
+      s "0";
+      s "1";
+      s "10";
+      s "-11";
+      s "-1100";
+      s "10111";
+
+      s "0";
+      s "1";
+      s "2";
+      s "-3";
+      s "-14";
+      s "27";
+
+      s "0";
+      s "1";
+      s "2";
+      s "-3";
+      s "-12";
+      s "23";
+
+      s "0";
+      s "1";
+      s "2";
+      s "-3";
+      s "-C";
+      s "17";
+
+      s "0";
+      s "1";
+      s "10";
+      s "-11";
+      s "-100";
       s "111"] :=
     eq_refl.
 

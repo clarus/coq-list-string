@@ -1,5 +1,6 @@
 Require Import Coq.Lists.List.
 Require Import Coq.NArith.NArith.
+Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 Require "Char".
@@ -25,22 +26,27 @@ Fixpoint of_string (s : String.string) : t :=
 (** Alias for [of_string]. *)
 Definition s := of_string.
 
-Fixpoint of_n_aux (base : N) (digits : nat) (n : N) : t :=
+Fixpoint of_N_aux (base : N) (digits : nat) (n : N) : t :=
   match digits with
   | O => []
   | S digits =>
     if N.eqb n 0 then
       []
     else
-      Char.digit (N.modulo n base) :: of_n_aux base digits (N.div n base)
+      Char.digit (N.modulo n base) :: of_N_aux base digits (N.div n base)
   end.
 
 (** Convert an integer to a string in base [base] with up to [digits] digits. *)
-Definition of_n (base : N) (digits : nat) (n : N) : t :=
+Definition of_N (base : N) (digits : nat) (n : N) : t :=
   if N.eqb n 0 then
     s "0"
   else
-    List.rev' (of_n_aux base digits n).
+    List.rev' (of_N_aux base digits n).
+
+(** Convert an integer to a string in base [base] with up to [digits] digits. *)
+Definition of_Z (base : N) (digits : nat) (n : Z) : t :=
+  (if Z.leb 0 n then s "" else s "-") ++
+  of_N base digits (Z.to_N (Z.abs n)).
 
 Module OfNat.
   Require Import Program.
