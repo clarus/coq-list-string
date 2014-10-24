@@ -1,4 +1,4 @@
--R . LString
+-R . ListString
 
 All.v
 Bool.v

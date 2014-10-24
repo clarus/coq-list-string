@@ -6,15 +6,15 @@ Require "LString".
 Require "Trim".
 
 Module LString.
-  Include LString.Case.
-  Include LString.Comparison.
-  Include LString.Conversion.
-  Include LString.Etc.
-  Include LString.LString.
-  Include LString.Trim.
+  Include ListString.Case.
+  Include ListString.Comparison.
+  Include ListString.Conversion.
+  Include ListString.Etc.
+  Include ListString.LString.
+  Include ListString.Trim.
 
   Module Char.
     Require "Char".
-    Include LString.Char.
+    Include ListString.Char.
   End Char.
 End LString.

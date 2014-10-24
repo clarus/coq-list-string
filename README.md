@@ -21,7 +21,7 @@ Do a classic:
 ## Use
 Add:
 
-    Require Import LString.All.
+    Require Import ListString.All.
 
 at the beginning of your source files. The library will be available under the `LString` module. It defines the type `LString.t` of strings encoded as lists of ASCII 8-bits characters. To define a string you can either define a list:
 
