@@ -1,6 +1,6 @@
 Require Import Coq.NArith.NArith.
 Require Import Coq.Strings.Ascii.
-Require "Bool".
+Require Bool.
 
 Local Open Scope char.
 Local Open Scope N.

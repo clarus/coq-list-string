@@ -1,6 +1,6 @@
 Require Import Coq.Lists.List.
-Require "Char".
-Require Import "LString".
+Require Char.
+Require Import LString.
 
 Import ListNotations.
 Import LString.

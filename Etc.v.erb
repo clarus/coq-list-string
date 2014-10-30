@@ -1,8 +1,8 @@
 Require Import Coq.Lists.List.
 Require Import Coq.Strings.Ascii.
-Require "Char".
-Require Import "Comparison".
-Require Import "LString".
+Require Char.
+Require Import Comparison.
+Require Import LString.
 
 Import ListNotations.
 Import LString.
@@ -29,7 +29,7 @@ Fixpoint repeat (s : t) (n : nat) : t :=
 (** Center a string on a line of width [width], with white space paddings. *)
 Definition center (s : t) (width : nat) : t :=
   let l := List.length s in
-  let l_left := Div2.div2 (width - l) in
+  let l_left := <%= /8\.4/ === version ? "Div2" : "Nat" %>.div2 (width - l) in
   let l_right := (width - l) - l_left in
   repeat [" "] l_left ++ s ++ repeat [" "] l_right.
 

@@ -20,10 +20,10 @@ ENV OPAMJOBS 4
 
 # Coq
 RUN opam repo add coqs https://github.com/coq/repo-coqs.git
-RUN opam install -y coq.dev
+RUN opam install -y coq.8.4.dev
 
 # Tools
-RUN apt-get install -y inotify-tools
+RUN apt-get install -y ruby inotify-tools
 
 # Compile
 ADD . /root/coq-list-string

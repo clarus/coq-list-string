@@ -3,8 +3,8 @@ Require Import Coq.NArith.NArith.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
-Require "Char".
-Require Import "LString".
+Require Char.
+Require Import LString.
 
 Import ListNotations.
 Import LString.
@@ -50,7 +50,8 @@ Definition of_Z (base : N) (digits : nat) (n : Z) : t :=
 
 Module OfNat.
   Require Import Program.
-  Import Arith Div2.
+  Require Import Coq.Arith.Arith.
+  Import Arith.
 
   Lemma of_nat_lemma : forall m n, 1 < m -> ~ n < m -> 0 < n.
     destruct n; destruct m; intros.
@@ -59,18 +60,20 @@ Module OfNat.
     eapply neq_0_lt. congruence.
   Qed.
 
+  <% nat = /8\.4/ === version ? "NPeano" : "Nat" %>
+
   Program Fixpoint of_nat_aux (base : nat) (_ : 1 < base) (n : nat) {measure n} : t :=
-    match NPeano.ltb n base as x return NPeano.ltb n base = x -> t with
+    match <%= nat %>.ltb n base as x return <%= nat %>.ltb n base = x -> t with
       | true => fun _ => [Char.digit (N.of_nat n)]
       | false => fun pf =>
-        let m := NPeano.div n base in
+        let m := <%= nat %>.div n base in
         Char.digit (N.of_nat (n - base * m)) :: of_nat_aux base _ m
     end eq_refl.
   Next Obligation.
-    eapply NPeano.Nat.div_lt; auto.
+    eapply <%= /8\.4/ === version ? "NPeano." : "" %>Nat.div_lt; auto.
     apply of_nat_lemma with (m := base); trivial.
     intro Hlt.
-    assert (Htrue := proj2 (NPeano.ltb_lt _ _) Hlt); congruence.
+    assert (Htrue := proj2 (<%= nat %>.ltb_lt _ _) Hlt); congruence.
   Defined.
 End OfNat.
 

@@ -1,8 +1,8 @@
 (** Comparison functions. *)
 Require Import Coq.Lists.List.
 Require Import Coq.Strings.Ascii.
-Require "Char".
-Require Import "LString".
+Require Char.
+Require Import LString.
 
 Import ListNotations.
 Import LString.

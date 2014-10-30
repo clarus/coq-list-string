@@ -9,7 +9,7 @@ Local Open Scope char.
 Local Open Scope N.
 
 Module Sugar.
-  Require "Conversion".
+  Require Conversion.
   Definition s := Conversion.s.
 End Sugar.
 Definition s := Sugar.s.
@@ -33,7 +33,7 @@ Module List.
 End List.
 
 Module Case.
-  Require Import "Case".
+  Require Import Case.
 
   Definition test_capitalize :
     List.map capitalize [s ""; s "A"; s "aAgZ,3%"] = [s ""; s "A"; s "AAgZ,3%"] :=
@@ -49,7 +49,7 @@ Module Case.
 End Case.
 
 Module Char.
-  Require Import "Char".
+  Require Import Char.
 
   Definition test_digit :
     List.map digit [0; 1; 5; 9; 10; 12; 23] =
@@ -82,7 +82,7 @@ Module Comparison.
 End Comparison.
 
 Module Conversion.
-  Require Import "Conversion".
+  Require Import Conversion.
 
   Definition test_to_string :
     List.map to_string [
@@ -266,7 +266,7 @@ Module Conversion.
 End Conversion.
 
 Module Etc.
-  Require Import "Etc".
+  Require Import Etc.
 
   Definition test_is_ascii :
     List.map is_ascii [s ""; s "ahah"; "128" :: s "ahah"] = [true; true; false] :=
@@ -329,7 +329,7 @@ Module Etc.
 End Etc.
 
 Module Trim.
-  Require Import "Trim".
+  Require Import Trim.
 
   Definition test_chomp :
     List.map chomp [s ""; s "aa"; s "aa "; s "aa" ++ ["010"];
