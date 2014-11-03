@@ -60,7 +60,7 @@ Module OfNat.
     eapply neq_0_lt. congruence.
   Qed.
 
-  <% nat = /8\.4/ === version ? "NPeano" : "Nat" %>
+  <% nat = version[0..2] == "8.4" ? "NPeano" : "Nat" %>
 
   Program Fixpoint of_nat_aux (base : nat) (_ : 1 < base) (n : nat) {measure n} : t :=
     match <%= nat %>.ltb n base as x return <%= nat %>.ltb n base = x -> t with
@@ -70,7 +70,7 @@ Module OfNat.
         Char.digit (N.of_nat (n - base * m)) :: of_nat_aux base _ m
     end eq_refl.
   Next Obligation.
-    eapply <%= /8\.4/ === version ? "NPeano." : "" %>Nat.div_lt; auto.
+    eapply <%= version[0..2] == "8.4" ? "NPeano." : "" %>Nat.div_lt; auto.
     apply of_nat_lemma with (m := base); trivial.
     intro Hlt.
     assert (Htrue := proj2 (<%= nat %>.ltb_lt _ _) Hlt); congruence.
