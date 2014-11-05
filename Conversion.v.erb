@@ -3,6 +3,7 @@ Require Import Coq.NArith.NArith.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
+Require Import ErrorHandlers.All.
 Require Char.
 Require Import LString.
 
@@ -33,7 +34,7 @@ Fixpoint of_N_aux (base : N) (digits : nat) (n : N) : t :=
     if N.eqb n 0 then
       []
     else
-      Char.digit (N.modulo n base) :: of_N_aux base digits (N.div n base)
+      Char.of_N (N.modulo n base) :: of_N_aux base digits (N.div n base)
   end.
 
 (** Convert an integer to a string in base [base] with up to [digits] digits. *)
@@ -64,10 +65,10 @@ Module OfNat.
 
   Program Fixpoint of_nat_aux (base : nat) (_ : 1 < base) (n : nat) {measure n} : t :=
     match <%= nat %>.ltb n base as x return <%= nat %>.ltb n base = x -> t with
-      | true => fun _ => [Char.digit (N.of_nat n)]
+      | true => fun _ => [Char.of_N (N.of_nat n)]
       | false => fun pf =>
         let m := <%= nat %>.div n base in
-        Char.digit (N.of_nat (n - base * m)) :: of_nat_aux base _ m
+        Char.of_N (N.of_nat (n - base * m)) :: of_nat_aux base _ m
     end eq_refl.
   Next Obligation.
     eapply <%= version[0..2] == "8.4" ? "NPeano." : "" %>Nat.div_lt; auto.
@@ -104,3 +105,19 @@ Definition of_nat_16 (n : nat) : t.
   refine (of_nat 16 _ n).
   repeat constructor.
 Defined.
+
+Fixpoint to_N_aux (base : N) (s : t) : option N :=
+  match s with
+  | [] => Some 0%N
+  | c :: s =>
+    let d := Char.to_N c in
+    if andb (N.leb 0 d) (N.ltb d base) then
+      Option.bind (to_N_aux base s) (fun n =>
+      Some (d + base * n)%N)
+    else
+      None
+  end.
+
+(** The integer represented by a string in base `base`. *)
+Definition to_N (base : N) (s : t) : option N :=
+  to_N_aux base (List.rev' s).

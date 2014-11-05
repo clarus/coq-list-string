@@ -31,20 +31,19 @@ Definition eqb (x y : Ascii.ascii) : bool :=
   end.
 
 (** The character of a digit (0, 1, ..., 9, A, B, ...). *)
-Definition digit (n : N) : Ascii.ascii :=
-  match n with
-  | 0 => "0"
-  | 1 => "1"
-  | 2 => "2"
-  | 3 => "3"
-  | 4 => "4"
-  | 5 => "5"
-  | 6 => "6"
-  | 7 => "7"
-  | 8 => "8"
-  | 9 => "9"
-  | n => Ascii.ascii_of_N (n - 10 + N_of_ascii "A")
-  end.
+Definition of_N (n : N) : Ascii.ascii :=
+  if N.leb n 9 then
+    Ascii.ascii_of_N (Ascii.N_of_ascii "0" + n)
+  else
+    Ascii.ascii_of_N (Ascii.N_of_ascii "A" + n - 10).
+
+(** The digit of a character (for 0, 1, ..., 9, A, B, ...). *)
+Definition to_N (c : Ascii.ascii) : N :=
+  let n := Ascii.N_of_ascii c in
+  if andb (N.leb (Ascii.N_of_ascii "0") n) (N.leb n (Ascii.N_of_ascii "9")) then
+    n - Ascii.N_of_ascii "0"
+  else
+    n - Ascii.N_of_ascii "A" + 10.
 
 (** Test if the character is in the ASCII range. *)
 Definition is_ascii (c : Ascii.ascii) : bool :=

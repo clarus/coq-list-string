@@ -66,6 +66,7 @@ at the beginning of your files.
 * `split (s : t) (c : ascii) : list t` Split a string at each occurrence of a given character. 
 * `split_limit (s : t) (c : ascii) (limit : nat) : list t` Split a string at each occurrence of a given character in a list of up to [limit] elements.
 * `t : Set := list Ascii.ascii` A string is a list of characters.
+* `to_N (base : N) (s : t) : option N` The integer represented by a string in base `base`.
 * `to_string (s : t) : String.string` Export to a standard string.
 * `trim (s : t) : t` Remove white spaces at the beginning and the end of a string (spaces, \t, \n, \v, \f or \r).
 * `trim_head (s : t) : t` Remove white spaces at the beginning of a string (spaces, \t, \n, \v, \f or \r).
@@ -76,11 +77,12 @@ at the beginning of your files.
 * `Char.compare (x y : Ascii.ascii) : comparison` Total order on characters.
   * `Char.compare_implies_eq : forall (x y : Ascii.ascii), compare x y = Eq -> x = y`
   * `Char.compare_same_is_eq : forall (x : Ascii.ascii), compare x x = Eq`
-* `Char.digit (n : N) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
 * `Char.down_case (c : Ascii.ascii) : Ascii.ascii` Replace uppercase letters by lowercase ones (only characters from a to z are affected).
 * `Char.eqb (x y : Ascii.ascii) : bool` Test if two characters are equal.
 * `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.
 * `Char.is_white_space (c : Ascii.ascii) : bool` Test if the character is a white space (space, \t, \n, \v, \f or \r).
+* `Char.of_N (n : N) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
+* `to_N (c : Ascii.ascii) : N` The digit of a character (for 0, 1, ..., 9, A, B, ...).
 * `Char.up_case (c : Ascii.ascii) : Ascii.ascii` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
 
 Special characters:

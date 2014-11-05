@@ -51,9 +51,14 @@ End Case.
 Module Char.
   Require Import Char.
 
-  Definition test_digit :
-    List.map digit [0; 1; 5; 9; 10; 12; 23] =
+  Definition test_of_N :
+    List.map of_N [0; 1; 5; 9; 10; 12; 23] =
       ["0"; "1"; "5"; "9"; "A"; "C" ; "N"] :=
+    eq_refl.
+
+  Definition test_to_N :
+    List.map to_N ["0"; "1"; "5"; "9"; "A"; "C" ; "N"] =
+      [0; 1; 5; 9; 10; 12; 23] :=
     eq_refl.
 
   Definition test_is_ascii :
@@ -262,6 +267,48 @@ Module Conversion.
   Definition test_of_nat_16 :
     List.map of_nat_16 [0; 1; 2; 3; 12; 23] % nat =
       [s "0"; s "1"; s "2"; s "3"; s "C"; s "17"] :=
+    eq_refl.
+
+  Definition test_to_N :
+    List.map_pair to_N [
+      (2, s "0");
+      (2, s "1");
+      (2, s "10");
+      (2, s "11");
+      (2, s "1100");
+      (2, s "10111");
+
+      (8, s "0");
+      (8, s "1");
+      (8, s "2");
+      (8, s "3");
+      (8, s "14");
+      (8, s "27");
+
+      (10, s "0");
+      (10, s "1");
+      (10, s "2");
+      (10, s "3");
+      (10, s "12");
+      (10, s "23");
+
+      (16, s "0");
+      (16, s "1");
+      (16, s "2");
+      (16, s "3");
+      (16, s "C");
+      (16, s "17");
+
+      (2, s "2");
+      (8, s "8");
+      (10, s "A");
+      (16, s "G");
+      (10, s "G")] = [
+      Some 0; Some 1; Some 2; Some 3; Some 12; Some 23;
+      Some 0; Some 1; Some 2; Some 3; Some 12; Some 23;
+      Some 0; Some 1; Some 2; Some 3; Some 12; Some 23;
+      Some 0; Some 1; Some 2; Some 3; Some 12; Some 23;
+      None; None; None; None; None] :=
     eq_refl.
 End Conversion.
 
