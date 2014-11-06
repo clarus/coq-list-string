@@ -249,26 +249,6 @@ Module Conversion.
       s "111"] :=
     eq_refl.
 
-  Definition test_of_nat_2 :
-    List.map of_nat_2 [0; 1; 2; 3; 12; 23] % nat =
-      [s "0"; s "1"; s "10"; s "11"; s "1100"; s "10111"] :=
-    eq_refl.
-
-  Definition test_of_nat_8 :
-    List.map of_nat_8 [0; 1; 2; 3; 12; 23] % nat =
-      [s "0"; s "1"; s "2"; s "3"; s "14"; s "27"] :=
-    eq_refl.
-
-  Definition test_of_nat_10 :
-    List.map of_nat_10 [0; 1; 2; 3; 12; 23] % nat =
-      [s "0"; s "1"; s "2"; s "3"; s "12"; s "23"] :=
-    eq_refl.
-
-  Definition test_of_nat_16 :
-    List.map of_nat_16 [0; 1; 2; 3; 12; 23] % nat =
-      [s "0"; s "1"; s "2"; s "3"; s "C"; s "17"] :=
-    eq_refl.
-
   Definition test_to_N :
     List.map_pair to_N [
       (2, s "0");

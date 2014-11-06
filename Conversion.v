@@ -49,63 +49,6 @@ Definition of_Z (base : N) (digits : nat) (n : Z) : t :=
   (if Z.leb 0 n then s "" else s "-") ++
   of_N base digits (Z.to_N (Z.abs n)).
 
-Module OfNat.
-  Require Import Program.
-  Require Import Coq.Arith.Arith.
-  Import Arith.
-
-  Lemma of_nat_lemma : forall m n, 1 < m -> ~ n < m -> 0 < n.
-    destruct n; destruct m; intros.
-    inversion H. exfalso. apply H0. etransitivity. 2: eassumption. repeat constructor.
-    inversion H.
-    eapply neq_0_lt. congruence.
-  Qed.
-
-  <% nat = version[0..2] == "8.4" ? "NPeano" : "Nat" %>
-
-  Program Fixpoint of_nat_aux (base : nat) (_ : 1 < base) (n : nat) {measure n} : t :=
-    match <%= nat %>.ltb n base as x return <%= nat %>.ltb n base = x -> t with
-      | true => fun _ => [Char.of_N (N.of_nat n)]
-      | false => fun pf =>
-        let m := <%= nat %>.div n base in
-        Char.of_N (N.of_nat (n - base * m)) :: of_nat_aux base _ m
-    end eq_refl.
-  Next Obligation.
-    eapply <%= version[0..2] == "8.4" ? "NPeano." : "" %>Nat.div_lt; auto.
-    apply of_nat_lemma with (m := base); trivial.
-    intro Hlt.
-    assert (Htrue := proj2 (<%= nat %>.ltb_lt _ _) Hlt); congruence.
-  Defined.
-End OfNat.
-
-(** Convert an integer to a string in base [base]. *)
-Definition of_nat (base : nat) (H : 1 < base) (n : nat) : t :=
-  List.rev' (OfNat.of_nat_aux base H n).
-
-(** Convert an integer to a string in base 2. *)
-Definition of_nat_2 (n : nat) : t.
-  refine (of_nat 2 _ n).
-  repeat constructor.
-Defined.
-
-(** Convert an integer to a string in base 8. *)
-Definition of_nat_8 (n : nat) : t.
-  refine (of_nat 8 _ n).
-  repeat constructor.
-Defined.
-
-(** Convert an integer to a string in base 10. *)
-Definition of_nat_10 (n : nat) : t.
-  refine (of_nat 10 _ n).
-  repeat constructor.
-Defined.
-
-(** Convert an integer to a string in base 16. *)
-Definition of_nat_16 (n : nat) : t.
-  refine (of_nat 16 _ n).
-  repeat constructor.
-Defined.
-
 Fixpoint to_N_aux (base : N) (s : t) : option N :=
   match s with
   | [] => Some 0%N

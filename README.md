@@ -54,11 +54,6 @@ at the beginning of your files.
 * `is_empty (s : t) : bool` Test if the string is empty.
 * `join (separator : t) (l : list t) : t` Concatenate the list of strings `l` with the separator `separator`.
 * `of_N (base : N) (digits : nat) (n : N) : t` Convert an integer to a string in base `base` with up to `digits` digits.
-* `of_nat (base : nat) (H : 1 < base) (n : nat) : t` Convert an integer to a string in base `base`.
-* `of_nat_2 (n : nat) : t` Convert an integer to a string in base 2.
-* `of_nat_8 (n : nat) : t` Convert an integer to a string in base 8.
-* `of_nat_10 (n : nat) : t` Convert an integer to a string in base 10.
-* `of_nat_16 (n : nat) : t` Convert an integer to a string in base 16.
 * `of_string (s : String.string) : t` Import a standard string. See the alias `s`.
 * `of_Z (base : N) (digits : nat) (n : Z) : t` Convert an integer to a string in base `base` with up to `digits` digits.
 * `repeat (s : t) (n : nat) : t` Repeat a string `n` times.
