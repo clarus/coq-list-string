@@ -12,8 +12,9 @@ and run:
     opam install coq-list-string
 
 ### From the sources
-Do a classic:
+Run:
 
+    ruby pp.rb
     ./configure.sh
     make
     make install
