@@ -4,11 +4,13 @@ Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 Require Import ErrorHandlers.All.
+Require Import ListPlus.All.
 Require Char.
 Require Import LString.
 
 Import ListNotations.
 Import LString.
+Local Open Scope char.
 
 (** Export to a standard string. *)
 Fixpoint to_string (s : t) : String.string :=
@@ -17,34 +19,66 @@ Fixpoint to_string (s : t) : String.string :=
   | c :: s => String.String c (to_string s)
   end.
 
-(** Import a standard string. See the alias [s]. *)
+(** Import a standard string. See the alias `s`. *)
 Fixpoint of_string (s : String.string) : t :=
   match s with
   | String.EmptyString => []
   | String.String c s => c :: of_string s
   end.
 
-(** Alias for [of_string]. *)
+(** Alias for `of_string`. *)
 Definition s := of_string.
 
 Fixpoint of_N_aux (base : N) (digits : nat) (n : N) : t :=
-  match digits with
-  | O => []
-  | S digits =>
-    if N.eqb n 0 then
-      []
-    else
+  match n with
+  | 0%N => []
+  | _ =>
+    match digits with
+    | O => []
+    | S digits =>
       Char.of_N (N.modulo n base) :: of_N_aux base digits (N.div n base)
+    end
   end.
 
-(** Convert an integer to a string in base [base] with up to [digits] digits. *)
+(** Convert an integer to a string in base `base` with up to `digits` digits. *)
 Definition of_N (base : N) (digits : nat) (n : N) : t :=
-  if N.eqb n 0 then
-    s "0"
-  else
-    List.rev' (of_N_aux base digits n).
+  match n with
+  | 0%N =>
+    match digits with
+    | O => []
+    | S _ => ["0"]
+    end
+  | _ => List.rev' (of_N_aux base digits n)
+  end.
 
-(** Convert an integer to a string in base [base] with up to [digits] digits. *)
+Fixpoint of_N_padding_aux (base : N) (digits : nat) (padding : Ascii.ascii)
+  (n : N) : t :=
+  match n with
+  | 0%N => List.repeat padding digits
+  | _ =>
+    match digits with
+    | O => []
+    | S digits =>
+      Char.of_N (N.modulo n base) ::
+        of_N_padding_aux base digits padding (N.div n base)
+    end
+  end.
+
+(** Convert an integer to a string in base `base` with up to `digits` digits,
+    padding with the character `padding` to make sure the result is of width
+    `digits`. *)
+Definition of_N_padding (base : N) (digits : nat) (padding : Ascii.ascii)
+  (n : N) : t :=
+  match n with
+  | 0%N =>
+    match digits with
+    | O => []
+    | S digits => List.repeat padding digits ++ ["0"]
+    end
+  | _ => List.rev' (of_N_padding_aux base digits padding n)
+  end.
+
+(** Convert an integer to a string in base `base` with up to `digits` digits. *)
 Definition of_Z (base : N) (digits : nat) (n : Z) : t :=
   (if Z.leb 0 n then s "" else s "-") ++
   of_N base digits (Z.to_N (Z.abs n)).

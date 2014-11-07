@@ -15,21 +15,26 @@ End Sugar.
 Definition s := Sugar.s.
 
 Module List.
-  Fixpoint map_pair (A B C : Type) (f : A -> B -> C) (l : list (A * B))
+  Fixpoint map_pair {A B C : Type} (f : A -> B -> C) (l : list (A * B))
     : list C :=
     match l with
     | [] => []
-    | (x, y) :: l => f x y :: map_pair _ _ _ f l
+    | (a, b) :: l => f a b :: map_pair f l
     end.
-  Arguments map_pair [A B C] _ _.
 
-  Fixpoint map_triple (A B C D : Type) (f : A -> B -> C -> D)
+  Fixpoint map_triple {A B C D : Type} (f : A -> B -> C -> D)
     (l : list (A * B * C)) : list D :=
     match l with
     | [] => []
-    | (x, y, z) :: l => f x y z :: map_triple _ _ _ _ f l
+    | (a, b, c) :: l => f a b c :: map_triple f l
     end.
-  Arguments map_triple [A B C D] _ _.
+
+  Fixpoint map_quad {A B C D E : Type} (f : A -> B -> C -> D -> E)
+    (l : list (A * B * C * D)) : list E :=
+    match l with
+    | [] => []
+    | (a, b, c, d) :: l => f a b c d :: map_quad f l
+    end.
 End List.
 
 Module Case.
@@ -107,6 +112,9 @@ Module Conversion.
 
   Definition test_of_N :
     List.map_triple of_N [
+      (10, 0%nat, 0);
+      (10, 0%nat, 10);
+
       (2, 10%nat, 0);
       (2, 10%nat, 1);
       (2, 10%nat, 2);
@@ -141,6 +149,9 @@ Module Conversion.
       (2, 3%nat, 3);
       (2, 3%nat, 12);
       (2, 3%nat, 23)] = [
+      s "";
+      s "";
+
       s "0";
       s "1";
       s "10";
@@ -173,6 +184,84 @@ Module Conversion.
       s "1";
       s "10";
       s "11";
+      s "100";
+      s "111"] :=
+    eq_refl.
+
+  Definition test_of_N_padding :
+    List.map_quad of_N_padding [
+      (10, 0%nat, "*", 0);
+      (10, 0%nat, "*", 10);
+
+      (2, 5%nat, "*", 0);
+      (2, 5%nat, "*", 1);
+      (2, 5%nat, "*", 2);
+      (2, 5%nat, "*", 3);
+      (2, 5%nat, "*", 12);
+      (2, 5%nat, "*", 23);
+
+      (8, 5%nat, "*", 0);
+      (8, 5%nat, "*", 1);
+      (8, 5%nat, "*", 2);
+      (8, 5%nat, "*", 3);
+      (8, 5%nat, "*", 12);
+      (8, 5%nat, "*", 23);
+
+      (10, 5%nat, "*", 0);
+      (10, 5%nat, "*", 1);
+      (10, 5%nat, "*", 2);
+      (10, 5%nat, "*", 3);
+      (10, 5%nat, "*", 12);
+      (10, 5%nat, "*", 23);
+
+      (16, 5%nat, "*", 0);
+      (16, 5%nat, "*", 1);
+      (16, 5%nat, "*", 2);
+      (16, 5%nat, "*", 3);
+      (16, 5%nat, "*", 12);
+      (16, 5%nat, "*", 23);
+
+      (2, 3%nat, "0", 0);
+      (2, 3%nat, "0", 1);
+      (2, 3%nat, "0", 2);
+      (2, 3%nat, "0", 3);
+      (2, 3%nat, "0", 12);
+      (2, 3%nat, "0", 23)] = [
+      s "";
+      s "";
+
+      s "****0";
+      s "****1";
+      s "***10";
+      s "***11";
+      s "*1100";
+      s "10111";
+
+      s "****0";
+      s "****1";
+      s "****2";
+      s "****3";
+      s "***14";
+      s "***27";
+
+      s "****0";
+      s "****1";
+      s "****2";
+      s "****3";
+      s "***12";
+      s "***23";
+
+      s "****0";
+      s "****1";
+      s "****2";
+      s "****3";
+      s "****C";
+      s "***17";
+
+      s "000";
+      s "001";
+      s "010";
+      s "011";
       s "100";
       s "111"] :=
     eq_refl.
