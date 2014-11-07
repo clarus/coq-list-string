@@ -78,7 +78,7 @@ at the beginning of your files.
 * `Char.is_ascii (c : Ascii.ascii) : bool` Test if the character is in the ASCII range.
 * `Char.is_white_space (c : Ascii.ascii) : bool` Test if the character is a white space (space, \t, \n, \v, \f or \r).
 * `Char.of_N (n : N) : Ascii.ascii` The character of a digit (0, 1, ..., 9, A, B, ...).
-* `Char.to_N (c : Ascii.ascii) : N` The digit of a character (for 0, 1, ..., 9, A, B, ...).
+* `Char.to_N (c : Ascii.ascii) : option N` The digit of a character (for 0, 1, ..., 9, A, B, ...).
 * `Char.up_case (c : Ascii.ascii) : Ascii.ascii` Replace lowercase letters by uppercase ones (only characters from a to z are affected).
 
 Special characters:

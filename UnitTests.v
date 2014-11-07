@@ -62,8 +62,8 @@ Module Char.
     eq_refl.
 
   Definition test_to_N :
-    List.map to_N ["0"; "1"; "5"; "9"; "A"; "C" ; "N"] =
-      [0; 1; 5; 9; 10; 12; 23] :=
+    List.map to_N ["0"; "1"; "5"; "9"; "A"; "C" ; "N"; "."] =
+      [Some 0; Some 1; Some 5; Some 9; Some 10; Some 12; Some 23; None] :=
     eq_refl.
 
   Definition test_is_ascii :

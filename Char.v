@@ -38,12 +38,14 @@ Definition of_N (n : N) : Ascii.ascii :=
     Ascii.ascii_of_N (Ascii.N_of_ascii "A" + n - 10).
 
 (** The digit of a character (for 0, 1, ..., 9, A, B, ...). *)
-Definition to_N (c : Ascii.ascii) : N :=
+Definition to_N (c : Ascii.ascii) : option N :=
   let n := Ascii.N_of_ascii c in
   if andb (N.leb (Ascii.N_of_ascii "0") n) (N.leb n (Ascii.N_of_ascii "9")) then
-    n - Ascii.N_of_ascii "0"
+    Some (n - Ascii.N_of_ascii "0")
+  else if N.leb (Ascii.N_of_ascii "A") n then
+    Some (n - Ascii.N_of_ascii "A" + 10)
   else
-    n - Ascii.N_of_ascii "A" + 10.
+    None.
 
 (** Test if the character is in the ASCII range. *)
 Definition is_ascii (c : Ascii.ascii) : bool :=

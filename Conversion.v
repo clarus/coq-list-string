@@ -73,12 +73,12 @@ Fixpoint to_N_aux (base : N) (s : t) : option N :=
   match s with
   | [] => Some 0%N
   | c :: s =>
-    let d := Char.to_N c in
+    Option.bind (Char.to_N c) (fun d =>
     if andb (N.leb 0 d) (N.ltb d base) then
       Option.bind (to_N_aux base s) (fun n =>
       Some (d + base * n)%N)
     else
-      None
+      None)
   end.
 
 (** The integer represented by a string in base `base`. *)
