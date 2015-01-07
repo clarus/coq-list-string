@@ -1,5 +1,5 @@
 # ![Logo](https://raw.githubusercontent.com/clarus/icons/master/typewriter-48.png) List String
-Strings implemented as lists. Finally.
+Strings implemented as lists.
 
 ## Install
 ### With OPAM
