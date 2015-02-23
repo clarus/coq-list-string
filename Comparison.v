@@ -53,4 +53,4 @@ Definition eq_dec (x y : t) : {x = y} + {x <> y}.
   - now apply eqb_implies_eq.
   - intro Heq; rewrite Heq in Heqb.
     rewrite eqb_same_is_eq in Heqb; congruence.
-Qed.
+Defined.
