@@ -75,3 +75,18 @@ Fixpoint split_limit_aux (s : t) (c : ascii) (beginning : t) (limit : nat)
     [limit] elements. *)
 Definition split_limit (s : t) (c : ascii) (limit : nat) : list t :=
   split_limit_aux s c [] limit.
+
+(** Escape the string to generate correct HTML. *)
+Fixpoint escape_html (s : t) : t :=
+  match s with
+  | [] => []
+  | c :: s =>
+    match c with
+    | "'" => ["&"; "a"; "p"; "o"; "s"; ";"]
+    | """" => ["&"; "q"; "u"; "o"; "t"; ";"]
+    | "&" => ["&"; "a"; "m"; "p"; ";"]
+    | "<" => ["&"; "l"; "t"; ";"]
+    | ">" => ["&"; "g"; "t"; ";"]
+    | _ => [c]
+    end ++ escape_html s
+  end.

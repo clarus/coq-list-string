@@ -440,6 +440,18 @@ Module Etc.
       [s "go stop go  "];
       [s "grr"]] :=
     eq_refl.
+
+  Definition test_escape_html :
+    List.map escape_html [
+      s "";
+      s "hello";
+      s "&";
+      s "'""&<>"] = [
+      s "";
+      s "hello";
+      s "&amp;";
+      s "&apos;&quot;&amp;&lt;&gt;"] :=
+    eq_refl.
 End Etc.
 
 Module Trim.

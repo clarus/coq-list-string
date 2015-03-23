@@ -51,6 +51,7 @@ at the beginning of your files.
 * `eqb (x y : t) : bool` Test if two strings are equal.
   * `eqb_implies_eq : forall (x y : t), eqb x y = true -> x = y`
   * `eqb_same_is_eq : forall (x : t), eqb x x = true`
+* `escape_html (s : t) : t` Escape the string to generate correct HTML.
 * `is_ascii (s : t) : bool` Test if the string contains only ASCII characters.
 * `is_empty (s : t) : bool` Test if the string is empty.
 * `join (separator : t) (l : list t) : t` Concatenate the list of strings `l` with the separator `separator`.
