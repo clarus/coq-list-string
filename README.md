@@ -5,11 +5,11 @@ Strings implemented as lists.
 ### With OPAM
 Add the Coq repository:
 
-    opam repo add coq-stable https://github.com/coq/repo-stable.git
+    opam repo add coq-released https://coq.inria.fr/opam/released
 
 and run:
 
-    opam install coq:list-string
+    opam install -j4 coq:list-string
 
 ### From the sources
 Run:
