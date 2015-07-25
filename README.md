@@ -14,7 +14,6 @@ and run:
 ### From the sources
 Run:
 
-    ruby pp.rb
     ./configure.sh
     make
     make install
