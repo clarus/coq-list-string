@@ -4,16 +4,13 @@ Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
 Require Import CUnit.All.
+Require Conversion.
 
 Import ListNotations.
 Local Open Scope char.
 Local Open Scope N.
 
-Module Sugar.
-  Require Conversion.
-  Definition s := Conversion.s.
-End Sugar.
-Definition s := Sugar.s.
+Definition s := Conversion.s.
 
 Module Case.
   Require Import Case.
