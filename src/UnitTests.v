@@ -3,6 +3,7 @@ Require Import Coq.NArith.NArith.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Strings.Ascii.
 Require Import Coq.Strings.String.
+Require Import CUnit.All.
 
 Import ListNotations.
 Local Open Scope char.
@@ -13,29 +14,6 @@ Module Sugar.
   Definition s := Conversion.s.
 End Sugar.
 Definition s := Sugar.s.
-
-Module List.
-  Fixpoint map_pair {A B C : Type} (f : A -> B -> C) (l : list (A * B))
-    : list C :=
-    match l with
-    | [] => []
-    | (a, b) :: l => f a b :: map_pair f l
-    end.
-
-  Fixpoint map_triple {A B C D : Type} (f : A -> B -> C -> D)
-    (l : list (A * B * C)) : list D :=
-    match l with
-    | [] => []
-    | (a, b, c) :: l => f a b c :: map_triple f l
-    end.
-
-  Fixpoint map_quad {A B C D E : Type} (f : A -> B -> C -> D -> E)
-    (l : list (A * B * C * D)) : list E :=
-    match l with
-    | [] => []
-    | (a, b, c, d) :: l => f a b c d :: map_quad f l
-    end.
-End List.
 
 Module Case.
   Require Import Case.
