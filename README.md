@@ -9,7 +9,7 @@ Add the [Coq repository](http://coq.io/opam/):
 
 and run:
 
-    opam install -j4 coq:list-string
+    opam install coq-list-string
 
 ### From the sources
 Run:
