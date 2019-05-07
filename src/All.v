@@ -1,3 +1,4 @@
+Require Char.
 Require Case.
 Require Comparison.
 Require Conversion.
@@ -14,7 +15,6 @@ Module LString.
   Include ListString.Trim.
 
   Module Char.
-    Require Char.
     Include ListString.Char.
   End Char.
 End LString.

@@ -6,6 +6,12 @@ Require Import Coq.Strings.String.
 Require Import CUnit.All.
 Require Conversion.
 
+Require Case.
+Require Char.
+Require Conversion.
+Require Etc.
+Require Trim.
+
 Import ListNotations.
 Local Open Scope char.
 Local Open Scope N.
@@ -13,10 +19,10 @@ Local Open Scope N.
 Definition s := Conversion.s.
 
 Module Case.
-  Require Import Case.
+  Import ListString.Case.
 
   Definition test_capitalize :
-    List.map capitalize [s ""; s "A"; s "aAgZ,3%"] = [s ""; s "A"; s "AAgZ,3%"] :=
+    List.map ListString.Case.capitalize [s ""; s "A"; s "aAgZ,3%"] = [s ""; s "A"; s "AAgZ,3%"] :=
     eq_refl.
 
   Definition test_down_case :
@@ -29,7 +35,7 @@ Module Case.
 End Case.
 
 Module Char.
-  Require Import Char.
+  Import ListString.Char.
 
   Definition test_of_N :
     List.map of_N [0; 1; 5; 9; 10; 12; 23] =
@@ -67,7 +73,7 @@ Module Comparison.
 End Comparison.
 
 Module Conversion.
-  Require Import Conversion.
+  Import ListString.Conversion.
 
   Definition test_to_string :
     List.map to_string [
@@ -355,7 +361,7 @@ Module Conversion.
 End Conversion.
 
 Module Etc.
-  Require Import Etc.
+  Import ListString.Etc.
 
   Definition test_is_ascii :
     List.map is_ascii [s ""; s "ahah"; "128" :: s "ahah"] = [true; true; false] :=
@@ -430,7 +436,7 @@ Module Etc.
 End Etc.
 
 Module Trim.
-  Require Import Trim.
+  Import ListString.Trim.
 
   Definition test_chomp :
     List.map chomp [s ""; s "aa"; s "aa "; s "aa" ++ ["010"];

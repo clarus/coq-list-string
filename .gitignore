@@ -1,6 +1,6 @@
 opam*/
-Etc.v
 Makefile
+Makefile.conf
 *.bak
 *.d
 *.vo
