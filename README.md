@@ -31,12 +31,27 @@ or import a Coq `string` using the string notation:
 
     LString.s "hello" : LString.t
 
-To have a nice pretty-printing of the strings, add:
+To have a nice pretty-printing of the characters in the lists, add:
 
     Require Import Coq.Strings.Ascii.
     Local Open Scope char.
 
 at the beginning of your files.
+
+## Example
+```coq
+Require Import ListString.All.
+
+Local Open Scope string_scope.
+
+Eval compute in LString.to_string (
+  LString.center (LString.capitalize (LString.of_string "hello")) 20
+).
+(*
+  = "       Hello        "
+    : String.string
+*)
+```
 
 ## Reference
 * `capitalize (s : t) : t` Convert the first character to uppercase.
